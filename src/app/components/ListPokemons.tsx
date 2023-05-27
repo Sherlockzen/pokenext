@@ -26,9 +26,13 @@ export async function ListPokemons({ page } : {page: number}) {
     const pokemons: list = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`)
                             .then(resp => resp.json());
     
+    const pageLimit: number = Math.floor(pokemons.count / limit);
+    
     
     return (
       <>
+        <div>{pokemons.count}</div>
+        <div>{pageLimit}</div>
         <div className=" flex flex-wrap gap-10 mt-10">
           {pokemons.results.map((pokemon, id) => (
             <div>
